@@ -5,7 +5,7 @@ require('./index.css').toString();
 
 /**
  * SimpleImage Tool for the CodeX Editor
- * Works only with pasted image URLs, don't requires server-side uploader.
+ * Works only with pasted image URLs and requires no server-side uploader.
  *
  * @typedef {object} SimpleImageData
  * @description Tool's input and output data format
