@@ -72,17 +72,17 @@ This Tool has no config params
 
 2. Stretch to full-width
 
-3. Add background and reduce image's max-width to 60%
+3. Add background
 
 ## Output data
 
-| Field          | Type      | Description                                                |
-| -------------- | --------- | ---------------------------------------------------------- |
-| url            | `string`  | image's url                                                |
-| caption        | `string`  | image's caption                                            |
-| withBorder     | `boolean` | add border to image                                        |
-| withBackground | `boolean` | need to reduce image's max-width to 60% and add background |
-| stretched      | `boolean` | stretch image to screen's width                            |
+| Field          | Type      | Description                     |
+| -------------- | --------- | ------------------------------- |
+| url            | `string`  | image's url                     |
+| caption        | `string`  | image's caption                 |
+| withBorder     | `boolean` | add border to image             |
+| withBackground | `boolean` | need to add background          |
+| stretched      | `boolean` | stretch image to screen's width |
 
 
 ```json
