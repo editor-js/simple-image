@@ -66,7 +66,7 @@ This Tool has no config params
 
 ## Tool's settings
 
-![](https://capella.pics/image/c74cdeec-3405-48ac-a960-f784188cf9b4)
+![](https://capella.pics/c74cdeec-3405-48ac-a960-f784188cf9b4.jpg)
 
 1. Add border
 
