@@ -17,11 +17,14 @@ require('./index.css').toString();
  */
 class SimpleImage {
   /**
-   * @param {SimpleImageData} imageData
-   * @param {object} config - user config for Tool
-   * @param {object} api - CodeX Editor API
+   * Render plugin`s main Element and fill it with saved data
+   *
+   * @param {{data: SimpleImageData, config: object, api: object}}
+   *   data — previously saved data
+   *   config - user config for Tool
+   *   api - CodeX Editor API
    */
-  constructor(imageData, config, api) {
+  constructor({data, config, api}) {
     /**
      * CodeX Editor API
      */
@@ -48,11 +51,11 @@ class SimpleImage {
      * Tool's initial data
      */
     this.data = {
-      url: imageData.url || '',
-      caption: imageData.caption || '',
-      withBorder: imageData.withBorder !== undefined ? imageData.withBorder : false,
-      withBackground: imageData.withBackground !== undefined ? imageData.withBackground : false,
-      stretched: imageData.stretched !== undefined ? imageData.stretched : false,
+      url: data.url || '',
+      caption: data.caption || '',
+      withBorder: data.withBorder !== undefined ? data.withBorder : false,
+      withBackground: data.withBackground !== undefined ? data.withBackground : false,
+      stretched: data.stretched !== undefined ? data.stretched : false,
     };
 
     /**
