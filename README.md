@@ -31,11 +31,9 @@ const SimpleImage = require('codex.editor.simple-image');
 
 ### Load from CDN
 
-Get newest bundle path from [RawGit](https://rawgit.com) — open site and paste link to JS bundle in repository.
+You can load specific version of package from [jsDelivr CDN](https://www.jsdelivr.com/package/npm/codex.editor.simple-image).
 
-`https://github.com/codex-editor/simple-image/blob/master/dist/bundle.js`
-
-> Note: use `production` link with commit hash to avoid issues with caching.
+`https://cdn.jsdelivr.net/npm/codex.editor.simple-image@1.0.1`
 
 Then require this script on page with CodeX Editor.
 
