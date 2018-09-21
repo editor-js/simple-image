@@ -137,7 +137,7 @@ class SimpleImage {
     let image = blockContent.querySelector('img'),
       caption = blockContent.querySelector('.' + this.CSS.input);
 
-    if (!image){
+    if (!image) {
       return this.data;
     }
 
@@ -166,6 +166,41 @@ class SimpleImage {
   }
 
   /**
+   * Read dropped image and convert it to base64
+   *
+   * @static
+   * @param {File} file
+   * @returns {Promise<SimpleImageData>}
+   */
+  static onDropHandler(file) {
+    const reader = new FileReader();
+
+    reader.readAsDataURL(file);
+
+    return new Promise(resolve => {
+      reader.onload = (event) => {
+        resolve({
+          url: event.target.result,
+          caption: file.name
+        });
+      };
+    });
+  }
+
+  /**
+   * Specify types of files to handle
+   * @see {@link ../../../docs/tools.md#dragndrop-handling}
+   *
+   * @static
+   */
+  static get onDrop() {
+    return {
+      mimeTypes: [ 'image/*' ],
+      handler: SimpleImage.onDropHandler
+    };
+  }
+
+  /**
    * Makes buttons with tunes: add background, add border, stretch image
    * @return {HTMLDivElement}
    */
@@ -174,6 +209,7 @@ class SimpleImage {
 
     this.settings.forEach( tune => {
       let el = document.createElement('div');
+
       el.classList.add(this.CSS.settingsButton);
       el.innerHTML = tune.icon;
 
