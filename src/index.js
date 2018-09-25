@@ -157,6 +157,13 @@ class SimpleImage {
       patterns: {
         image: /https?:\/\/\S+\.(gif|jpe?g|tiff|png)$/i
       },
+      tags: [ 'img' ],
+      handler: (img) => {
+        console.log('here', img);
+        return {
+          url: img.src
+        };
+      },
       patternHandler: (text) => {
         return {
           url: text
