@@ -148,31 +148,7 @@ class SimpleImage {
   }
 
   /**
-   * Specify paste pattern
-   * @see {@link ../../../docs/tools.md#patterns-handling}
-   * @public
-   */
-  static get onPaste() {
-    return {
-      patterns: {
-        image: /https?:\/\/\S+\.(gif|jpe?g|tiff|png)$/i
-      },
-      tags: [ 'img' ],
-      handler: (img) => {
-        return {
-          url: img.src
-        };
-      },
-      patternHandler: (text) => {
-        return {
-          url: text
-        };
-      },
-    };
-  }
-
-  /**
-   * Read dropped image and convert it to base64
+   * Read pasted image and convert it to base64
    *
    * @static
    * @param {File} file
@@ -194,15 +170,30 @@ class SimpleImage {
   }
 
   /**
-   * Specify types of files to handle
-   * @see {@link ../../../docs/tools.md#dragndrop-handling}
-   *
-   * @static
+   * Specify paste substitutes
+   * @see {@link ../../../docs/tools.md#paste-handling}
+   * @public
    */
-  static get onDrop() {
+  static get onPaste() {
     return {
-      mimeTypes: [ 'image/*' ],
-      handler: SimpleImage.onDropHandler
+      patterns: {
+        image: /https?:\/\/\S+\.(gif|jpe?g|tiff|png)$/i
+      },
+      tags: [ 'img' ],
+      files: {
+        mimeTypes: [ 'image/*' ]
+      },
+      fileHandler: SimpleImage.onDropHandler,
+      handler: (img) => {
+        return {
+          url: img.src
+        };
+      },
+      patternHandler: (text) => {
+        return {
+          url: text
+        };
+      },
     };
   }
 
