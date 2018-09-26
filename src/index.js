@@ -159,7 +159,6 @@ class SimpleImage {
       },
       tags: [ 'img' ],
       handler: (img) => {
-        console.log('here', img);
         return {
           url: img.src
         };
