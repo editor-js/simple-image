@@ -137,7 +137,7 @@ class SimpleImage {
     let image = blockContent.querySelector('img'),
       caption = blockContent.querySelector('.' + this.CSS.input);
 
-    if (!image){
+    if (!image) {
       return this.data;
     }
 
@@ -148,14 +148,46 @@ class SimpleImage {
   }
 
   /**
-   * Specify paste pattern
-   * @see {@link ../../../docs/tools.md#patterns-handling}
+   * Read pasted image and convert it to base64
+   *
+   * @static
+   * @param {File} file
+   * @returns {Promise<SimpleImageData>}
+   */
+  static onDropHandler(file) {
+    const reader = new FileReader();
+
+    reader.readAsDataURL(file);
+
+    return new Promise(resolve => {
+      reader.onload = (event) => {
+        resolve({
+          url: event.target.result,
+          caption: file.name
+        });
+      };
+    });
+  }
+
+  /**
+   * Specify paste substitutes
+   * @see {@link ../../../docs/tools.md#paste-handling}
    * @public
    */
   static get onPaste() {
     return {
       patterns: {
         image: /https?:\/\/\S+\.(gif|jpe?g|tiff|png)$/i
+      },
+      tags: [ 'img' ],
+      files: {
+        mimeTypes: [ 'image/*' ]
+      },
+      fileHandler: SimpleImage.onDropHandler,
+      handler: (img) => {
+        return {
+          url: img.src
+        };
       },
       patternHandler: (text) => {
         return {
@@ -174,6 +206,7 @@ class SimpleImage {
 
     this.settings.forEach( tune => {
       let el = document.createElement('div');
+
       el.classList.add(this.CSS.settingsButton);
       el.innerHTML = tune.icon;
 
