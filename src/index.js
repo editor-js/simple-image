@@ -157,20 +157,7 @@ class SimpleImage {
       withBackground: {},
       stretched: {},
       caption: {
-        a: {
-          href: true,
-          target: '_blank',
-          rel: 'nofollow'
-        },
-        b: {},
-        i: {},
         br: true,
-        span: {
-          class: 'inline-code'
-        },
-        mark: {
-          class: 'cdx-marker'
-        }
       },
     };
   }
