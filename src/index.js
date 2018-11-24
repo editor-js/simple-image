@@ -48,6 +48,16 @@ class SimpleImage {
     };
 
     /**
+     * Nodes cache
+     */
+    this.nodes = {
+      wrapper: null,
+      imageHolder: null,
+      image: null,
+      caption: null
+    };
+
+    /**
      * Tool's initial data
      */
     this.data = {
@@ -56,14 +66,6 @@ class SimpleImage {
       withBorder: data.withBorder !== undefined ? data.withBorder : false,
       withBackground: data.withBackground !== undefined ? data.withBackground : false,
       stretched: data.stretched !== undefined ? data.stretched : false,
-    };
-
-    /**
-     * Nodes cache
-     */
-    this.nodes = {
-      wrapper: null,
-      imageHolder: null,
     };
 
     /**
@@ -116,13 +118,15 @@ class SimpleImage {
       this._acceptTuneView();
     };
 
-    image.onerror = () => {
+    image.onerror = (e) => {
       // @todo use api.Notifies.show() to show error notification
-      console.log('Failed to load an image');
+      console.log('Failed to load an image', e);
     };
 
     this.nodes.imageHolder = imageHolder;
     this.nodes.wrapper = wrapper;
+    this.nodes.image = image;
+    this.nodes.caption = caption;
 
     return wrapper;
   }
@@ -182,7 +186,7 @@ class SimpleImage {
    * @param {File} file
    * @returns {Promise<SimpleImageData>}
    */
-  static onDropHandler(file) {
+  onDropHandler(file) {
     const reader = new FileReader();
 
     reader.readAsDataURL(file);
@@ -198,11 +202,67 @@ class SimpleImage {
   }
 
   /**
+   * On paste callback that is fired from Editor.
+   *
+   * @param {PasteEvent} event - event with pasted config
+   */
+  onPaste(event) {
+    switch (event.type) {
+      case 'tag':
+        const img = event.detail.data;
+
+        this.data = {
+          url: img.src,
+        };
+        break;
+
+      case 'pattern':
+        const {data: text} = event.detail;
+
+        this.data = {
+          url: text,
+        };
+        break;
+
+      case 'file':
+        const {file} = event.detail;
+
+        this.data = this.onDropHandler(file);
+        break;
+    }
+  }
+
+  /**
+   * Returns image data
+   * @return {SimpleImageData}
+   */
+  get data() {
+    return this._data;
+  }
+
+  /**
+   * Set image data and update the view
+   *
+   * @param {SimpleImageData} data
+   */
+  set data(data) {
+    this._data = Object.assign({}, this.data, data);
+
+    if (this.nodes.image) {
+      this.nodes.image.src = this.data.url;
+    }
+
+    if (this.nodes.caption) {
+      this.nodes.caption.innerHTML = this.data.caption;
+    }
+  }
+
+  /**
    * Specify paste substitutes
    * @see {@link ../../../docs/tools.md#paste-handling}
    * @public
    */
-  static get onPaste() {
+  static get pasteConfig() {
     return {
       patterns: {
         image: /https?:\/\/\S+\.(gif|jpe?g|tiff|png)$/i
@@ -210,17 +270,6 @@ class SimpleImage {
       tags: [ 'img' ],
       files: {
         mimeTypes: [ 'image/*' ]
-      },
-      fileHandler: SimpleImage.onDropHandler,
-      handler: (img) => {
-        return {
-          url: img.src
-        };
-      },
-      patternHandler: (text) => {
-        return {
-          url: text
-        };
       },
     };
   }
