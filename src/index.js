@@ -106,8 +106,11 @@ class SimpleImage {
 
     caption.dataset.placeholder = 'Enter a caption';
 
-    image.src = this.data.url;
     wrapper.appendChild(loader);
+
+    if (this.data.url) {
+      image.src = this.data.url;
+    }
 
     image.onload = () => {
       wrapper.classList.remove(this.CSS.loading);
@@ -227,7 +230,11 @@ class SimpleImage {
       case 'file':
         const {file} = event.detail;
 
-        this.data = this.onDropHandler(file);
+        this.onDropHandler(file)
+          .then(data => {
+            this.data = data;
+          });
+
         break;
     }
   }
