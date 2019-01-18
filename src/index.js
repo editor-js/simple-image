@@ -157,7 +157,7 @@ class SimpleImage {
   /**
    * Sanitizer rules
    */
-  get sanitize() {
+  static get sanitize() {
     return {
       url: {},
       withBorder: {},
