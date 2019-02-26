@@ -1,8 +1,8 @@
-![](https://badgen.net/badge/CodeX%20Editor/v2.0/blue)
+![](https://badgen.net/badge/Editor.js/v2.0/blue)
 
 # Simple Image Tool
 
-Provides Image Blocks for the [CodeX Editor](https://ifmo.su/editor).
+Provides Image Blocks for the [Editor.js](https://ifmo.su/editor).
 
 Works only with pasted image URLs and requires no server-side uploader.
 
@@ -15,13 +15,13 @@ Works only with pasted image URLs and requires no server-side uploader.
 Get the package
 
 ```shell
-npm i --save-dev codex.editor.simple-image
+npm i --save-dev @editor/simple-image
 ```
 
 Include module at your application
 
 ```javascript
-const SimpleImage = require('codex.editor.simple-image');
+const SimpleImage = require('@editor/simple-image');
 ```
 
 ### Download to your project's source dir
@@ -31,11 +31,11 @@ const SimpleImage = require('codex.editor.simple-image');
 
 ### Load from CDN
 
-You can load specific version of package from [jsDelivr CDN](https://www.jsdelivr.com/package/npm/codex.editor.simple-image).
+You can load specific version of package from [jsDelivr CDN](https://www.jsdelivr.com/package/npm/@editor/simple-image).
 
-`https://cdn.jsdelivr.net/npm/codex.editor.simple-image@1.0.1`
+`https://cdn.jsdelivr.net/npm/@editor/simple-image@1.0.1`
 
-Then require this script on page with CodeX Editor.
+Then require this script on page with Editor.js.
 
 ```html
 <script src="..."></script>
@@ -43,10 +43,10 @@ Then require this script on page with CodeX Editor.
 
 ## Usage
 
-Add a new Tool to the `tools` property of the CodeX Editor initial config.
+Add a new Tool to the `tools` property of the Editor.js initial config.
 
 ```javascript
-var editor = CodexEditor({
+var editor = EditorJS({
   ...
   
   tools: {

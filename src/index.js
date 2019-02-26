@@ -4,7 +4,7 @@
 require('./index.css').toString();
 
 /**
- * SimpleImage Tool for the CodeX Editor
+ * SimpleImage Tool for the Editor.js
  * Works only with pasted image URLs and requires no server-side uploader.
  *
  * @typedef {object} SimpleImageData
@@ -22,11 +22,11 @@ class SimpleImage {
    * @param {{data: SimpleImageData, config: object, api: object}}
    *   data — previously saved data
    *   config - user config for Tool
-   *   api - CodeX Editor API
+   *   api - Editor.js API
    */
   constructor({data, config, api}) {
     /**
-     * CodeX Editor API
+     * Editor.js API
      */
     this.api = api;
 

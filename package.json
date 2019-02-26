@@ -1,15 +1,17 @@
 {
-  "name": "codex.editor.simple-image",
+  "name": "@editor/simple-image",
   "version": "1.2.0",
   "keywords": [
     "codex editor",
     "tool",
     "image",
-    "server-less"
+    "server-less",
+    "editor.js",
+    "editorjs"
   ],
-  "description": "SimpleImage Tool for CodeX.Editor",
+  "description": "SimpleImage Tool for Editor.js",
   "license": "MIT",
-  "repository": "https://github.com/codex-editor/simple-image",
+  "repository": "https://github.com/editorjs/simple-image",
   "main": "./dist/bundle.js",
   "scripts": {
     "build": "webpack --config ./webpack.config.js --mode production --watch"
