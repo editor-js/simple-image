@@ -2,7 +2,7 @@
 
 # Simple Image Tool
 
-Provides Image Blocks for the [Editor.js](https://ifmo.su/editor).
+Provides Image Blocks for the [Editor.js](https://editorjs.io).
 
 Works only with pasted image URLs and requires no server-side uploader.
 
