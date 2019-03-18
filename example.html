@@ -1,0 +1,47 @@
+<style>
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        font-size: 14px;
+        line-height: 1.5em;
+    }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
+<script src="simple-image.js"></script>
+<link href="simple-image.css" rel="stylesheet"/>
+
+<div id="editorjs" style="max-width: 1000px; margin: 0 auto"></div>
+
+<button id="save-button">Save</button>
+<pre id="output"></pre>
+
+<script>
+    const editor = new EditorJS({
+      autofocus: true,
+      tools: {
+        image: SimpleImage
+      },
+      data: {
+        time: 1552744582955,
+        blocks: [
+          {
+            type: "image",
+            data: {
+              url: "https://cdn.pixabay.com/photo/2017/09/01/21/53/blue-2705642_1280.jpg",
+              caption: 'Here is a caption field'
+            }
+          }
+        ],
+        version: "2.11.10"
+      }
+    });
+
+    const saveButton = document.getElementById('save-button');
+    const output = document.getElementById('output');
+
+    saveButton.addEventListener('click', () => {
+      editor.save().then( savedData => {
+        output.innerHTML = JSON.stringify(savedData, null, 4);
+      })
+    })
+</script>
