@@ -6,8 +6,29 @@ class SimpleImage {
     };
   }
 
-  constructor({data}){
-    this.data = data;
+  static get pasteConfig() {
+    return {
+      tags: ['IMG'],
+      files: {
+        mimeTypes: ['image/*'],
+        extensions: ['gif', 'jpg', 'png'] // You can specify extensions instead of mime-types
+      },
+      patterns: {
+        image: /https?:\/\/\S+\.(gif|jpe?g|tiff|png)$/i
+      }
+    }
+  }
+
+  constructor({data, api}){
+    this.api = api;
+    this.data = {
+      url: data.url || '',
+      caption: data.caption || '',
+      withBorder: data.withBorder !== undefined ? data.withBorder : false,
+      withBackground: data.withBackground !== undefined ? data.withBackground : false,
+      stretched: data.stretched !== undefined ? data.stretched : false,
+    };
+
     this.wrapper = undefined;
     this.settings = [
       {
@@ -30,7 +51,7 @@ class SimpleImage {
     this.wrapper.classList.add('simple-image');
 
     if (this.data && this.data.url){
-      this.createImage(this.data.url, this.data.caption);
+      this._createImage(this.data.url, this.data.caption);
       return this.wrapper;
     }
 
@@ -48,25 +69,27 @@ class SimpleImage {
 
   _createImage(url, captionText){
     const image = document.createElement('img');
-    const caption = document.createElement('input');
+    const caption = document.createElement('div');
 
     image.src = url;
-    caption.placeholder = 'Caption...';
-    caption.value = captionText || '';
+    caption.contentEditable = true;
+    caption.innerHTML = captionText || '';
 
     this.wrapper.innerHTML = '';
     this.wrapper.appendChild(image);
     this.wrapper.appendChild(caption);
+
+    this._acceptTuneView();
   }
 
   save(blockContent){
     const image = blockContent.querySelector('img');
-    const caption = blockContent.querySelector('input');
+    const caption = blockContent.querySelector('[contenteditable]');
 
-    return {
+    return Object.assign(this.data, {
       url: image.src,
-      caption: caption.value
-    }
+      caption: caption.innerHTML || ''
+    });
   }
 
   validate(savedData){
@@ -83,14 +106,16 @@ class SimpleImage {
     this.settings.forEach( tune => {
       let button = document.createElement('div');
 
-      button.classList.add('cdx-settings-button');
+      button.classList.add(this.api.styles.settingsButton);
+      button.classList.toggle(this.api.styles.settingsButtonActive, this.data[tune.name]);
       button.innerHTML = tune.icon;
       wrapper.appendChild(button);
 
       button.addEventListener('click', () => {
         this._toggleTune(tune.name);
-        button.classList.toggle('cdx-settings-button--active');
+        button.classList.toggle(this.api.styles.settingsButtonActive);
       });
+
     });
 
     return wrapper;
@@ -102,6 +127,46 @@ class SimpleImage {
    * @param {string} tune — tune name from this.settings
    */
   _toggleTune(tune) {
-    console.log('Image tune clicked', tune);
+    this.data[tune] = !this.data[tune];
+    this._acceptTuneView();
+  }
+
+  /**
+   * Add specified class corresponds with activated tunes
+   * @private
+   */
+  _acceptTuneView() {
+    this.settings.forEach( tune => {
+      this.wrapper.classList.toggle(tune.name, !!this.data[tune.name]);
+
+      if (tune.name === 'stretched') {
+        this.api.blocks.stretchBlock(this.api.blocks.getCurrentBlockIndex(), !!this.data.stretched);
+      }
+    });
+  }
+
+  onPaste(event){
+    switch (event.type){
+      case 'tag':
+        const imgTag = event.detail.data;
+        this._createImage(imgTag.src);
+        break;
+      case 'file':
+        /* We need to read file here as base64 string */
+        const file = event.detail.file;
+        const reader = new FileReader();
+
+        reader.onload = (loadEvent) => {
+          this._createImage(loadEvent.target.result);
+        };
+
+        reader.readAsDataURL(file);
+        break;
+      case 'pattern':
+        const src = event.detail.data;
+
+        this._createImage(src);
+        break;
+    }
   }
 }

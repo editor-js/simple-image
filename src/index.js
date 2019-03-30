@@ -339,19 +339,19 @@ class SimpleImage {
     this._acceptTuneView();
   }
 
-  /**
-   * Add specified class corresponds with activated tunes
-   * @private
-   */
-  _acceptTuneView() {
-    this.settings.forEach( tune => {
-      this.nodes.imageHolder.classList.toggle(this.CSS.imageHolder + '--' + tune.name.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`), !!this.data[tune.name]);
+/**
+ * Add specified class corresponds with activated tunes
+ * @private
+ */
+_acceptTuneView() {
+  this.settings.forEach( tune => {
+    this.nodes.imageHolder.classList.toggle(this.CSS.imageHolder + '--' + tune.name.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`), !!this.data[tune.name]);
 
-      if (tune.name === 'stretched') {
-        this.api.blocks.stretchBlock(this.api.blocks.getCurrentBlockIndex(), !!this.data.stretched);
-      }
-    });
-  }
+    if (tune.name === 'stretched') {
+      this.api.blocks.stretchBlock(this.api.blocks.getCurrentBlockIndex(), !!this.data.stretched);
+    }
+  });
+}
 }
 
 module.exports = SimpleImage;

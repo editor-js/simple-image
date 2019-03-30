@@ -2,7 +2,7 @@
     padding: 20px 0;
 }
 
-.simple-image input {
+.simple-image [contenteditable] {
     width: 100%;
     padding: 10px;
     border: 1px solid #e4e4e4;
@@ -14,4 +14,19 @@
 .simple-image img {
     max-width: 100%;
     margin-bottom: 15px;
+}
+
+.simple-image.withBorder img {
+    border: 1px solid #e8e8eb;
+}
+
+.simple-image.withBackground {
+    background: #eff2f5;
+    padding: 10px;
+}
+
+.simple-image.withBackground img {
+    display: block;
+    max-width: 60%;
+    margin: 0 auto 15px;
 }
