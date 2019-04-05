@@ -15,13 +15,13 @@ Works only with pasted image URLs and requires no server-side uploader.
 Get the package
 
 ```shell
-npm i --save-dev @editor/simple-image
+npm i --save-dev @editorjs/simple-image
 ```
 
 Include module at your application
 
 ```javascript
-const SimpleImage = require('@editor/simple-image');
+const SimpleImage = require('@editorjs/simple-image');
 ```
 
 ### Download to your project's source dir
@@ -33,7 +33,7 @@ const SimpleImage = require('@editor/simple-image');
 
 You can load specific version of package from [jsDelivr CDN](https://www.jsdelivr.com/package/npm/@editor/simple-image).
 
-`https://cdn.jsdelivr.net/npm/@editor/simple-image@1.0.1`
+`https://cdn.jsdelivr.net/npm/@editorjs/simple-image@latest`
 
 Then require this script on page with Editor.js.
 
