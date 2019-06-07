@@ -20,7 +20,7 @@
  }
 
 .cdx-simple-image__caption[contentEditable=true][data-placeholder]:empty:focus::before {
-  opacity: 0.3;
+  opacity: 0;
 }
 
 
