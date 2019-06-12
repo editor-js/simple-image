@@ -45,6 +45,7 @@ class SimpleImage {
        */
       wrapper: 'cdx-simple-image',
       imageHolder: 'cdx-simple-image__picture',
+      caption: 'cdx-simple-image__caption'
     };
 
     /**
@@ -99,7 +100,7 @@ class SimpleImage {
       loader = this._make('div', this.CSS.loading),
       imageHolder = this._make('div', this.CSS.imageHolder),
       image = this._make('img'),
-      caption = this._make('div', this.CSS.input, {
+      caption = this._make('div', [this.CSS.input, this.CSS.caption], {
         contentEditable: 'true',
         innerHTML: this.data.caption || ''
       });
