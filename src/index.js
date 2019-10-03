@@ -31,6 +31,15 @@ class SimpleImage {
     this.api = api;
 
     /**
+     * When block is only constructing,
+     * current block points to previous block.
+     * So real block index will be +1 after rendering
+     * @todo place it at the `rendered` event hook to get real block index without +1;
+     * @type {number}
+     */
+    this.blockIndex = this.api.blocks.getCurrentBlockIndex() + 1;
+
+    /**
      * Styles
      */
     this.CSS = {
@@ -165,20 +174,7 @@ class SimpleImage {
       withBackground: {},
       stretched: {},
       caption: {
-        a: {
-          href: true,
-          target: '_blank',
-          rel: 'nofollow'
-        },
-        b: {},
-        i: {},
         br: true,
-        span: {
-          class: 'inline-code'
-        },
-        mark: {
-          class: 'cdx-marker'
-        }
       },
     };
   }
@@ -349,7 +345,7 @@ class SimpleImage {
       this.nodes.imageHolder.classList.toggle(this.CSS.imageHolder + '--' + tune.name.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`), !!this.data[tune.name]);
 
       if (tune.name === 'stretched') {
-        this.api.blocks.stretchBlock(this.api.blocks.getCurrentBlockIndex(), !!this.data.stretched);
+        this.api.blocks.stretchBlock(this.blockIndex, !!this.data.stretched);
       }
     });
   }
