@@ -23,12 +23,14 @@ class SimpleImage {
    *   data — previously saved data
    *   config - user config for Tool
    *   api - Editor.js API
+   *   readOnly - read-only mode
    */
-  constructor({data, config, api}) {
+  constructor({data, config, api, readOnly}) {
     /**
      * Editor.js API
      */
     this.api = api;
+    this.readOnly = readOnly;
 
     /**
      * When block is only constructing,
@@ -110,7 +112,7 @@ class SimpleImage {
       imageHolder = this._make('div', this.CSS.imageHolder),
       image = this._make('img'),
       caption = this._make('div', [this.CSS.input, this.CSS.caption], {
-        contentEditable: 'true',
+        contentEditable: this.readOnly ? 'false' : 'true',
         innerHTML: this.data.caption || ''
       });
 
