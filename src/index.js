@@ -162,7 +162,7 @@ class SimpleImage {
     }
 
     return Object.assign(this.data, {
-      url: image.src,
+      url:  this.data.url, 
       caption: caption.innerHTML,
     });
   }
