@@ -31,7 +31,7 @@ const SimpleImage = require('@editorjs/simple-image');
 
 ### Load from CDN
 
-You can load specific version of package from [jsDelivr CDN](https://www.jsdelivr.com/package/npm/@editor/simple-image).
+You can load specific version of package from [jsDelivr CDN](https://www.jsdelivr.com/package/npm/@editorjs/simple-image).
 
 `https://cdn.jsdelivr.net/npm/@editorjs/simple-image@latest`
 
