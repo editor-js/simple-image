@@ -28,6 +28,7 @@ module.exports = {
     publicPath: '/',
     filename: 'bundle.js',
     library: 'SimpleImage',
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
+    libraryExport: 'default',
   }
 };
