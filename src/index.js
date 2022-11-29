@@ -87,17 +87,17 @@ export default class SimpleImage {
     this.tunes = [
       {
         name: 'withBorder',
-        label: 'With border',
+        label: 'Add Border',
         icon: IconAddBorder,
       },
       {
         name: 'stretched',
-        label: 'Stretch image',
+        label: 'Stretch Image',
         icon: IconStretch,
       },
       {
         name: 'withBackground',
-        label: 'With background',
+        label: 'Add Background',
         icon: IconAddBackground,
       },
     ];
