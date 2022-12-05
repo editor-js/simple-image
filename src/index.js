@@ -291,7 +291,11 @@ export default class SimpleImage {
       patterns: {
         image: /https?:\/\/\S+\.(gif|jpe?g|tiff|png|webp)$/i,
       },
-      tags: [ 'img' ],
+      tags: [
+        {
+          img: { src: true },
+        },
+      ],
       files: {
         mimeTypes: [ 'image/*' ],
       },
