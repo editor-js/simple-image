@@ -48,12 +48,12 @@ Add a new Tool to the `tools` property of the Editor.js initial config.
 ```javascript
 var editor = EditorJS({
   ...
-  
+
   tools: {
     ...
     image: SimpleImage,
   }
-  
+
   ...
 });
 ```
@@ -64,7 +64,7 @@ This Tool has no config params
 
 ## Tool's settings
 
-![](https://capella.pics/c74cdeec-3405-48ac-a960-f784188cf9b4.jpg)
+![](assets/68747470733a2f2f636170656c6c612e706963732f63373463646565632d333430352d343861632d613936302d6637383431383863663962342e6a7067.jpeg)
 
 1. Add border
 
