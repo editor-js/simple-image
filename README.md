@@ -1,6 +1,10 @@
 ![](https://badgen.net/badge/Editor.js/v2.0/blue)
 
-# Simple Image Tool
+# Simple Image Tool WIHTOUT BASE64 
+
+### Why?
+
+Because it may be unsafe or take up too much space on servers/databases. Use the image URL instead.
 
 Provides Image Blocks for the [Editor.js](https://editorjs.io).
 
@@ -10,24 +14,19 @@ Works only with pasted image URLs and requires no server-side uploader.
 
 ## Installation
 
-### Install via NPM
+### 
 
 Get the package
 
 ```shell
-npm i --save-dev @editorjs/simple-image
+git clone https://github.com/Michota/simple-image/
 ```
 
 Include module at your application
 
 ```javascript
-const SimpleImage = require('@editorjs/simple-image');
+import SimpleImage = ../simple-image/src/index.js";
 ```
-
-### Download to your project's source dir
-
-1. Upload folder `dist` from repository
-2. Add `dist/bundle.js` file to your page.
 
 ### Load from CDN
 
