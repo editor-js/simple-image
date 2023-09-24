@@ -1,6 +1,10 @@
 ![](https://badgen.net/badge/Editor.js/v2.0/blue)
 
-# Simple Image Tool
+# Simple Image Tool WIHTOUT BASE64 
+
+### Why?
+
+Because it may be unsafe or take up too much space on servers/databases. Use the image URL instead.
 
 Provides Image Blocks for the [Editor.js](https://editorjs.io).
 
