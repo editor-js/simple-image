@@ -1,9 +1,13 @@
 /**
  * Build styles
  */
-import './index.css';
+import "./index.css";
 
-import { IconAddBorder, IconStretch, IconAddBackground } from '@codexteam/icons';
+import {
+  IconAddBorder,
+  IconStretch,
+  IconAddBackground,
+} from "@codexteam/icons";
 
 /**
  * SimpleImage Tool for the Editor.js
@@ -55,9 +59,9 @@ export default class SimpleImage {
       /**
        * Tool's classes
        */
-      wrapper: 'cdx-simple-image',
-      imageHolder: 'cdx-simple-image__picture',
-      caption: 'cdx-simple-image__caption',
+      wrapper: "cdx-simple-image",
+      imageHolder: "cdx-simple-image__picture",
+      caption: "cdx-simple-image__caption",
     };
 
     /**
@@ -74,10 +78,11 @@ export default class SimpleImage {
      * Tool's initial data
      */
     this.data = {
-      url: data.url || '',
-      caption: data.caption || '',
+      url: data.url || "",
+      caption: data.caption || "",
       withBorder: data.withBorder !== undefined ? data.withBorder : false,
-      withBackground: data.withBackground !== undefined ? data.withBackground : false,
+      withBackground:
+        data.withBackground !== undefined ? data.withBackground : false,
       stretched: data.stretched !== undefined ? data.stretched : false,
     };
 
@@ -86,18 +91,18 @@ export default class SimpleImage {
      */
     this.tunes = [
       {
-        name: 'withBorder',
-        label: 'Add Border',
+        name: "withBorder",
+        label: "Add Border",
         icon: IconAddBorder,
       },
       {
-        name: 'stretched',
-        label: 'Stretch Image',
+        name: "stretched",
+        label: "Stretch Image",
         icon: IconStretch,
       },
       {
-        name: 'withBackground',
-        label: 'Add Background',
+        name: "withBackground",
+        label: "Add Background",
         icon: IconAddBackground,
       },
     ];
@@ -112,16 +117,16 @@ export default class SimpleImage {
    * @public
    */
   render() {
-    const wrapper = this._make('div', [this.CSS.baseClass, this.CSS.wrapper]),
-        loader = this._make('div', this.CSS.loading),
-        imageHolder = this._make('div', this.CSS.imageHolder),
-        image = this._make('img'),
-        caption = this._make('div', [this.CSS.input, this.CSS.caption], {
-          contentEditable: !this.readOnly,
-          innerHTML: this.data.caption || '',
-        });
+    const wrapper = this._make("div", [this.CSS.baseClass, this.CSS.wrapper]),
+      loader = this._make("div", this.CSS.loading),
+      imageHolder = this._make("div", this.CSS.imageHolder),
+      image = this._make("img"),
+      caption = this._make("div", [this.CSS.input, this.CSS.caption], {
+        contentEditable: !this.readOnly,
+        innerHTML: this.data.caption || "",
+      });
 
-    caption.dataset.placeholder = 'Enter a caption';
+    caption.dataset.placeholder = "Enter a caption";
 
     wrapper.appendChild(loader);
 
@@ -140,7 +145,7 @@ export default class SimpleImage {
 
     image.onerror = (e) => {
       // @todo use api.Notifies.show() to show error notification
-      console.log('Failed to load an image', e);
+      console.log("Failed to load an image", e);
     };
 
     this.nodes.imageHolder = imageHolder;
@@ -157,8 +162,8 @@ export default class SimpleImage {
    * @returns {SimpleImageData}
    */
   save(blockContent) {
-    const image = blockContent.querySelector('img'),
-        caption = blockContent.querySelector('.' + this.CSS.input);
+    const image = blockContent.querySelector("img"),
+      caption = blockContent.querySelector("." + this.CSS.input);
 
     if (!image) {
       return this.data;
@@ -206,8 +211,9 @@ export default class SimpleImage {
 
     reader.readAsDataURL(file);
 
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       reader.onload = (event) => {
+        console.log("xxx", event);
         resolve({
           url: event.target.result,
           caption: file.name,
@@ -222,8 +228,10 @@ export default class SimpleImage {
    * @param {PasteEvent} event - event with pasted config
    */
   onPaste(event) {
+    console.log("xxx", event);
+
     switch (event.type) {
-      case 'tag': {
+      case "tag": {
         const img = event.detail.data;
 
         this.data = {
@@ -232,7 +240,7 @@ export default class SimpleImage {
         break;
       }
 
-      case 'pattern': {
+      case "pattern": {
         const { data: text } = event.detail;
 
         this.data = {
@@ -241,15 +249,13 @@ export default class SimpleImage {
         break;
       }
 
-      case 'file': {
-        const { file } = event.detail;
+      case "file": {
+        throw new Error("I only accept URLs, not files!");
+        // const { file } = event.detail;
 
-        this.onDropHandler(file)
-          .then(data => {
-            this.data = data;
-          });
-
-        break;
+        // this.onDropHandler(file).then((data) => {
+        //   this.data = data;
+        // });
       }
     }
   }
@@ -296,9 +302,9 @@ export default class SimpleImage {
           img: { src: true },
         },
       ],
-      files: {
-        mimeTypes: [ 'image/*' ],
-      },
+      // files: {
+      //   mimeTypes: ["image/*"],
+      // },
     };
   }
 
@@ -308,14 +314,14 @@ export default class SimpleImage {
    * @returns {Array}
    */
   renderSettings() {
-    return this.tunes.map(tune => ({
+    return this.tunes.map((tune) => ({
       ...tune,
       label: this.api.i18n.t(tune.label),
       toggle: true,
       onActivate: () => this._toggleTune(tune.name),
       isActive: !!this.data[tune.name],
-    }))
-  };
+    }));
+  }
 
   /**
    * Helper for making Elements with attributes
@@ -358,10 +364,15 @@ export default class SimpleImage {
    * @private
    */
   _acceptTuneView() {
-    this.tunes.forEach(tune => {
-      this.nodes.imageHolder.classList.toggle(this.CSS.imageHolder + '--' + tune.name.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`), !!this.data[tune.name]);
+    this.tunes.forEach((tune) => {
+      this.nodes.imageHolder.classList.toggle(
+        this.CSS.imageHolder +
+          "--" +
+          tune.name.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`),
+        !!this.data[tune.name]
+      );
 
-      if (tune.name === 'stretched') {
+      if (tune.name === "stretched") {
         this.api.blocks.stretchBlock(this.blockIndex, !!this.data.stretched);
       }
     });
