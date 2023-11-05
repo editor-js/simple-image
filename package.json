@@ -1,9 +1,8 @@
 {
   "name": "@editorjs/simple-image",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "keywords": [
     "codex editor",
-    "tool",
     "image",
     "server-less",
     "editor.js",
