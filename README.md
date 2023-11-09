@@ -19,20 +19,11 @@ yarn add @editorjs/simple-image
 Include module at your application
 
 ```javascript
-import SimpleImage from '@editorjs/simple-image';
+import SimpleImage from "@editorjs/simple-image";
 ```
 
-### Load from CDN
+Optionally, you can load this tool from CDN [JsDelivr CDN](https://cdn.jsdelivr.net/npm/@editorjs/simple-image@latest)
 
-You can load specific version of package from [jsDelivr CDN](https://www.jsdelivr.com/package/npm/@editorjs/simple-image).
-
-`https://cdn.jsdelivr.net/npm/@editorjs/simple-image@latest`
-
-Then require this script on page with Editor.js.
-
-```html
-<script src="..."></script>
-```
 
 ## Usage
 
@@ -41,12 +32,12 @@ Add a new Tool to the `tools` property of the Editor.js initial config.
 ```javascript
 var editor = EditorJS({
   ...
-  
+
   tools: {
     ...
     image: SimpleImage,
   }
-  
+
   ...
 });
 ```
@@ -75,16 +66,15 @@ This Tool has no config params
 | withBackground | `boolean` | need to add background          |
 | stretched      | `boolean` | stretch image to screen's width |
 
-
 ```json
 {
-    "type" : "image",
-    "data" : {
-        "url" : "https://www.tesla.com/tesla_theme/assets/img/_vehicle_redesign/roadster_and_semi/roadster/hero.jpg",
-        "caption" : "Roadster // tesla.com",
-        "withBorder" : false,
-        "withBackground" : false,
-        "stretched" : true
-    }
+  "type": "image",
+  "data": {
+    "url": "https://www.tesla.com/tesla_theme/assets/img/_vehicle_redesign/roadster_and_semi/roadster/hero.jpg",
+    "caption": "Roadster // tesla.com",
+    "withBorder": false,
+    "withBackground": false,
+    "stretched": true
+  }
 }
 ```
