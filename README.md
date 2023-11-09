@@ -22,7 +22,7 @@ Include module at your application
 import SimpleImage from "@editorjs/simple-image";
 ```
 
-Optionally, you can load this tool from CDN [JsDelivr CDN](https://cdn.jsdelivr.net/npm/@editorjs/simple-image@latest)
+Optionally, you can load this tool from CDN [JsDelivr CDN](https://cdn.jsdelivr.net/npm/@editorjs/simple-image)
 
 
 ## Usage
