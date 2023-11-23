@@ -21,6 +21,10 @@ Include module at your application
 ```javascript
 import SimpleImage from "@editorjs/simple-image";
 ```
+OR
+```javascript
+import SimpleImage from '@editorjs/simple-image'
+```
 
 Optionally, you can load this tool from CDN [JsDelivr CDN](https://cdn.jsdelivr.net/npm/@editorjs/simple-image)
 
@@ -41,6 +45,16 @@ var editor = EditorJS({
   ...
 });
 ```
+## How to insert an image
+
+**Note:** There is no insert icon for this package. To insert an image, you need to drag and drop the image (GIF/JPEG/JPG/PNG/SVG/WEBP) into the editor.
+
+**Steps:**
+
+1. Open the editor.
+2. Drag and drop the image into the editor.
+3. The image will be inserted into the editor at the current cursor position.
+4. You can then Add Border, Stretch Image and Add Background the image as needed.
 
 ## Config Params
 
